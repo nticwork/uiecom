@@ -8,7 +8,7 @@ use App\Http\Controllers\HelloWorldController;
 
 use Illuminate\Support\Facades\Route;
 
-
+use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Support\Facades\DB;
@@ -63,3 +63,24 @@ Route::get('/produits/create',[RproductController::class,'create'])->name('creat
 
 
 Route::delete('/produits/{id}', [RproductController::class,'destroy'])->name('destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['adminuser'])->group(function () {
+    Route::get('/espaceadmin', [ProduitController::class,'espaceadmin'])->name('espaceadmin');
+    Route::get('/produits/create', [RproductController::class,'create'])->name('create');
+    Route::post('/produits', [RproductController::class, 'store'])->name('store');
+    Route::get('/produits/{id}/edit', [RproductController::class,'edit'])->name('edit');
+    Route::put('/produits/{id}', [RproductController::class,'update'])->name('update');
+    Route::delete('/produits/{id}', [RproductController::class,'destroy'])->name('destroy');
+});
+
+
+// Routes réservées aux utilisateurs réguliers
+Route::middleware(['useruser'])->group(function () {
+    Route::get('/espaceclient', [ProduitController::class,'espaceclient'])->name('espaceclient');
+    // Ajoutez d'autres routes spécifiques aux utilisateurs sinécessaire
+});

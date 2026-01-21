@@ -12,6 +12,12 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+ // Déclaration des rôles 
+    const ROLE_USER = 'USER'; 
+    const ROLE_ADMIN = 'ADMIN';
+
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,7 +26,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password', 
+        'role', 
     ];
 
     /**

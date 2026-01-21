@@ -33,4 +33,25 @@ $cat=$rq->route('cat');
        ]);
 
 }
+
+public function espaceadmin(){
+
+
+    $produits=Produit::paginate(3);
+    return view('espaceadmin',['products' => $produits ]);
+
+}
+public function espaceclient(){
+
+
+
+    return view('espaceclient');
+
+}
+
+
+
+
+
+
 }
