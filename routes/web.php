@@ -84,3 +84,5 @@ Route::middleware(['useruser'])->group(function () {
     Route::get('/espaceclient', [ProduitController::class,'espaceclient'])->name('espaceclient');
     // Ajoutez d'autres routes spécifiques aux utilisateurs sinécessaire
 });
+
+// testt
