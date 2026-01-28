@@ -76,7 +76,15 @@ Route::middleware(['adminuser'])->group(function () {
     Route::get('/produits/{id}/edit', [RproductController::class,'edit'])->name('edit');
     Route::put('/produits/{id}', [RproductController::class,'update'])->name('update');
     Route::delete('/produits/{id}', [RproductController::class,'destroy'])->name('destroy');
-});
+    Route::get('/espaceadmin', [ProduitController::class,'espaceadmin']);
+    Route::get('/email', [RproductController::class,'email']);
+    Route::post('/send/email', [RproductController::class, 'sendEmail'])->name('send.email');
+
+
+
+
+
+    });
 
 
 // Routes réservées aux utilisateurs réguliers
@@ -86,3 +94,5 @@ Route::middleware(['useruser'])->group(function () {
 });
 
 // testt
+
+

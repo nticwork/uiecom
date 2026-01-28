@@ -1,45 +1,59 @@
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">FullStack Ecom</a>
-    <button class="navbar-toggler" type="button" datatoggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data
+toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/produitsr/electromenager">Electroménager</a>
+          <a class="nav-link"
+href="/produitsr/electromenager">Electromenager</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/produitsr/hicking">Hicking</a>
         </li>
 
-        @if(Auth::check())
-            @if(Auth::user()->role === App\Models\User::ROLE_ADMIN)
+    @if(Auth::user())
+
+        @if(Auth::user()->role==='ADMIN')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('create')}}">Ajouter un Produit</a>
+         <a class="nav-link" href="{{ route('create') }}">Ajouter Un
+nouveau Produit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/espaceadmin">Gestion des Produits</a>
+                        <a class="nav-link" href="/espaceadmin">Mise
+à jour des produits</a>
                 </li>
-            @elseif(Auth::user()->role ===App\Models\User::ROLE_USER)
                 <li class="nav-item">
-                    <a class="nav-link" href="/espaceclient">EspaceClient</a>
+                        <a class="nav-link" href="/email">Send Email</a>
                 </li>
-            @endif
-            <li class="nav-item">
-                <form action="{{ route('logout') }}" method="POST"
-class="form-inline">
-                    @csrf
-                    <button type="submit" class="btn nav-link btnlink">Déconnexion</button>
-                </form>
-            </li>
-        @else
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">SeConnecter</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('register')}}">S'inscrire</a>
-            </li>
         @endif
+        @if(Auth::user()->role==='USER')
+                <li class="nav-item">
+                        <a class="nav-link"
+href="/espaceclient">Espace Client</a>
+                </li>
+        @endif
+        <li class="nav-item active">
+
+            <form action="/logout" method="POST">
+                @csrf
+            <button type="submit" class="btn"
+href="/logout">Deconnexion </button>
+                </form>
+        </li>
+
+    @else
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Se Connecter</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/register">S'inscrire</a>
+        </li>
+    @endif
       </ul>
     </div>
-</nav>
+  </nav>

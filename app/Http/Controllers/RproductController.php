@@ -6,6 +6,8 @@ use App\Http\Requests\AddProductRequest;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Cloudinary\Cloudinary;
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 
 class RproductController extends Controller
 {
@@ -204,5 +206,27 @@ $image = $result['secure_url'];   }else{
 
          return back()->with('successdelete','You have successfully deleted a product.');
 
+    }
+
+
+
+    public function sendEmail(Request $request)
+{
+    $data = [
+        'recipient_email' => $request->input('recipient_email'),
+        'subject' => $request->input('subject'),
+        'message' => $request->input('message'),
+    ];
+
+    // Envoyer l'e-mail en utilisant la classe Mailable
+    Mail::to($data['recipient_email'])->send(new TestMail($data));
+
+    return back()->with('success','Email sent successfully!');
+}
+
+
+public function email()
+    {
+        return view('email');
     }
 }
